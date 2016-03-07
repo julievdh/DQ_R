@@ -13,10 +13,16 @@ trialmn <- c(22.4346153846154,    39.1156250000000,  32.2573684210526,
 
 # individual and tag condition are factors
 Ind <- c(3,1,2,4,1,3,1,1,2,3,4,3,1,3,4,1,3,2,3,3,1,3,4,4,3,3,4,3,1,4,2)
-Ind <- as.factor(Ind)
 # O = no tag; 1 = tag; 5 = tag + 4; 10 = boat, no tag; 11 = boat, tag; 13 = boat, tag + 2
 Condition <- c(0,5,1,0,0,1,1,5,0,5,1,0,1,5,0,0,1,1,0,5,1,1,11,10,11,10,13,13,5,5,0)
+
+# Make non-boat trials only
+trialmn <- trialmn[Condition < 10]
+Ind <- Ind[Condition < 10]
+Condition <- Condition[Condition < 10]
+Ind <- as.factor(Ind)
 Condition <- as.factor(Condition)
+
 
 # set up linear model
 linear.model <- lm(trialmn ~ Ind + Condition)
@@ -26,3 +32,7 @@ TukeyHSD(aov(linear.model))
 
 # plot
 plot(trialmn ~ Ind*Condition)
+
+# Calculate percent increase in lap duration
+(mean(trialmn[Condition==5])-mean(trialmn[Condition==0]))/mean(trialmn[Condition==0])
+(mean(trialmn[Condition==5])-mean(trialmn[Condition==1]))/mean(trialmn[Condition==1])

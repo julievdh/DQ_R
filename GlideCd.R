@@ -23,7 +23,7 @@ aov2 <- anova(linear.modelduration)
 
 TukeyHSD(aov(linear.modelduration))
 
-require(vioplot)
+# require(vioplot)
 require(devtools)
 require(digest)
 require(beanplot)
