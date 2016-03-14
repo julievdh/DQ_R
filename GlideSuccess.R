@@ -12,9 +12,9 @@ data <- data.frame(dat$Individual.1[1:8], dat$Condition.1[1:8], dat$Overall.Rate
 colnames(data) <- c("ID","Tag","Success")
 
 data$ID <- as.factor(data$ID)
-data$Tag <- as.factor(c("No Tag","No Tag","Tag","Tag","Tag + 2","Tag + 2","Tag + 4","Tag + 4"))
+data$Tag <- as.factor(c("No Tag","No Tag","Tag","Tag","Tag + 4","Tag + 4","Tag + 8","Tag + 8"))
 
-setwd("~/Documents/R/DQ2013/AnalysisFigures") # set directory to figures
+setwd("~/Documents/R/DQ_R/AnalysisFigures") # set directory to figures
 
 pdf("GlideSuccess.pdf",width = 5,height = 3)
 

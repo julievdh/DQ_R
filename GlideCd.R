@@ -2,7 +2,7 @@ library(R.matlab)
 library(agricolae)
 
 setwd("~/Documents/MATLAB/DQ/DQ2013/Glides")
-data <- readMat('GlideData_Redo.mat')
+data <- readMat('Data_Readmatv6.mat')
 
 # drag coefficients measured from video from two separate points on the body
 Cd1 <- data$mav[,3]
@@ -25,10 +25,10 @@ TukeyHSD(aov(linear.modelduration))
 
 # require(vioplot)
 require(devtools)
-require(digest)
+# require(digest)
 require(beanplot)
 
-setwd("~/Documents/R/DQ2013/AnalysisFigures") # set directory to figures
+setwd("~/Documents/R/DQ_R/AnalysisFigures") # set directory to figures
 
 pdf("GlideCd_beanplot.pdf",width = 5,height = 5)
 op <- par(mfrow = c(2,1),
@@ -39,7 +39,7 @@ beanplot(Cdmean ~ Ind*Tag, ll = 0.04,
          side = "both", ylab="Drag Coefficient, Cd",
          col = list("grey", c("white", "black")),
          axes=F, beanlinewd = 1.5)
-axis(1, at=c(1, 2, 3, 4),  labels=c("No Tag", "Tag", "Tag + 2", "Tag + 4"))
+axis(1, at=c(1, 2, 3, 4),  labels=c("No Tag", "Tag", "Tag + 4", "Tag + 8"))
 axis(2)
 legend("topleft", fill = c("grey", "white"),
        legend = c("Hoku", "Liho"), box.lty=0)
@@ -52,7 +52,7 @@ beanplot(data$dur ~ Ind*Tag, ll = 0.04,
          axes=F, ylim = c(-20,120),
          beanlinewd = 1.5)
 text(c(1,2,3,4),c(-10,-10,-10,-10),labels = c("a","a","ab","b"))
-axis(1, at=c(1, 2, 3, 4),  labels=c("No Tag", "Tag", "Tag + 2", "Tag + 4"))
+axis(1, at=c(1, 2, 3, 4),  labels=c("No Tag", "Tag", "Tag + 4", "Tag + 8"))
 axis(2, at = c(0,60,120))
 
 
