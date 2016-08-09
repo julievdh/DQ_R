@@ -17,22 +17,37 @@ Ind <- c(3,1,2,4,1,3,1,1,2,3,4,3,1,3,4,1,3,2,3,3,1,3,4,4,3,3,4,3,1,4,2)
 Condition <- c(0,5,1,0,0,1,1,5,0,5,1,0,1,5,0,0,1,1,0,5,1,1,11,10,11,10,13,13,5,5,0)
 
 # Make non-boat trials only
-trialmn <- trialmn[Condition < 10]
-Ind <- Ind[Condition < 10]
-Condition <- Condition[Condition < 10]
-Ind <- as.factor(Ind)
-Condition <- as.factor(Condition)
+trialmean <- trialmn[Condition < 10]
+Indv <- as.factor(Ind[Condition < 10])
+Cond <- as.factor(Condition[Condition < 10])
 
 
 # set up linear model
-linear.model <- lm(trialmn ~ Ind + Condition)
+linear.model <- lm(trialmean ~ Indv + Cond)
 aov <- anova(linear.model)
 
 TukeyHSD(aov(linear.model))
 
 # plot
-plot(trialmn ~ Ind*Condition)
+plot(trialmean ~ Indv*Cond)
 
 # Calculate percent increase in lap duration
-(mean(trialmn[Condition==5])-mean(trialmn[Condition==0]))/mean(trialmn[Condition==0])
-(mean(trialmn[Condition==5])-mean(trialmn[Condition==1]))/mean(trialmn[Condition==1])
+(mean(trialmean[Cond==5])-mean(trialmean[Cond==0]))/mean(trialmean[Cond==0])
+(mean(trialmean[Cond==5])-mean(trialmean[Cond==1]))/mean(trialmean[Cond==1])
+
+## Make All Trials
+# Make non-boat trials only
+trialmn <- trialmn
+Ind <- as.factor(Ind)
+Cond <- as.factor(Condition)
+
+
+# set up linear model
+linear.model <- lm(trialmn ~ Ind + Cond)
+aov <- anova(linear.model)
+
+TukeyHSD(aov(linear.model))
+
+# plot
+plot(trialmn ~ Indv*Cond)
+
