@@ -1,5 +1,6 @@
 library(R.matlab)
 library(agricolae)
+require(PMCMR)
 
 setwd("~/Documents/MATLAB/DQ/DQ2013/Glides")
 data <- readMat('Data_ReadNew.mat')
@@ -15,7 +16,9 @@ bartlett.test(t(data$dur) ~ data$Tag) # Duration
 # to test for effect of tag
 kruskal.test(Cdmean ~ data$Tag) # Method 1
 kruskal.test(CDAS ~ data$Tag) # Method 2
+posthoc.kruskal.dunn.test(x = CDAS, g = data$Tag,p.adjust.method = "none") # post-hoc dunn test
 kruskal.test(t(data$dur)~ data$Tag) # Duration
+posthoc.kruskal.dunn.test(x = t(data$dur), g = data$Tag,p.adjust.method = "none")
 
 # Any difference in initial velocity?
 kruskal.test(data$sspeed~ data$Tag)
