@@ -38,5 +38,15 @@ foldchange[6] <- mean(CDAS[which(Tag == 5)])/mean(CDAS[which(Tag == 0)])
 plot(c(1,2,3),foldchange[4:6],col = 'blue')
 points(c(1,2,3),foldchange[1:3],col = 'black')
 
+# Multiple comparison for CFD data
+# from GlideDataPlots.m
+vel <- c(1,2,3,4,5,6)
+CFD_Cd_notag <- c(0.0127,0.0106,0.0097,0.0094,0.0093,0.0092)
+CFD_Cd_tag <- c(0.0132,0.0111,0.0102,0.0099,0.0098,0.0097)
+CFD_Cd_tag2 <- c(0.0159,0.0144,0.0132,0.0129,0.0128,0.0127)
+CFD_Cd_tag4 <- c(0.0186,0.0169,0.0162,0.0160,0.0157,0.0158)
 
-
+allvel <- as.factor(rep(vel,4))
+tag <- as.factor(c(0,0,0,0,1,1,1,1,2,2,2,2,4,4,4,4))
+allCFD <- c(CFD_Cd_notag,CFD_Cd_tag,CFD_Cd_tag2,CFD_Cd_tag4)
+# ANOVA with Tukey's HSD
