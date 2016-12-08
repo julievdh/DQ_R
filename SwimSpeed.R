@@ -36,7 +36,6 @@ plot(trialmean ~ Indv*Cond)
 (mean(trialmean[Cond==5])-mean(trialmean[Cond==1]))/mean(trialmean[Cond==1])
 
 ## Make All Trials
-# Make non-boat trials only
 trialmn <- trialmn
 Ind <- as.factor(Ind)
 Cond <- as.factor(Condition)
@@ -49,5 +48,19 @@ aov <- anova(linear.model)
 TukeyHSD(aov(linear.model))
 
 # plot
-plot(trialmn ~ Indv*Cond)
+plot(trialmn ~ Ind*Cond)
 
+## Make Boat Trials Only
+trialmnB <- trialmn[Condition > 9]
+IndB <- as.factor(Ind[Condition > 9])
+CondB <- as.factor(Condition[Condition > 9])
+
+
+# set up linear model
+linear.model <- lm(trialmnB ~ IndB + CondB)
+aov <- anova(linear.model)
+
+TukeyHSD(aov(linear.model))
+
+# plot
+plot(trialmnB ~ IndB*CondB)
