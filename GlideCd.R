@@ -28,15 +28,15 @@ Ulm <- lm(data$Uo ~ tag+Ind)
 anova(Ulm)
 
 # Multiple comparison for CFD data
-data <- read_excel('Cd Calculations - with success rate.xlsx',6)
+data <- read_excel('Fish_CFD_Cd.xlsx',2) # second sheet is formatted as transpose
 
 tag <- as.factor(data$Condition)
 
 # ANOVA with Tukey's HSD on CFD data
-CFD.linear.model <- lm(data$Cd ~ tag)
+CFD.linear.model <- lm(data$Cd ~ tag+data$Speed)
 CFD.aov <- anova(CFD.linear.model)
 
-tukdur <-TukeyHSD(aov(CFD.linear.model))
+tukCFD <-TukeyHSD(aov(CFD.linear.model))
 
 #### -- Success rate
 data <- read_excel('Cd Calculations - with success rate.xlsx',7)
@@ -49,3 +49,4 @@ ggplot(data, aes(factor(Condition),Rate, fill = Animal)) +
   xlab(" ") +
   ylab("Success Rate") +
   theme(axis.text=element_text(size=12), axis.title=element_text(size=14))
+  

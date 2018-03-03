@@ -2,7 +2,7 @@
 setwd("~/Documents/NOPPTagDrag/DolphinQuest2013/Glides/")
 
 # Import file
-dat <- read.csv("GlideSuccess.csv",header=TRUE)
+dat <- read.csv("GlideSuccess_2017.csv",header=TRUE)
 
 library(ggplot2)
 library(plyr)
